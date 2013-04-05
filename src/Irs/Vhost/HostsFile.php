@@ -57,7 +57,7 @@ class HostsFile
 
     public function hasHost($name)
     {
-        return (bool)preg_match('#\s+' . preg_quote($name, '#') . '\s+#', $this->content);
+        return (bool)preg_match('#\s+' . preg_quote($name, '#') . '\s*#s', $this->content);
     }
 
     public function toString()

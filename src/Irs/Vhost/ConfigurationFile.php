@@ -23,7 +23,7 @@ class ConfigurationFile
 	 */
 	public function getHosts()
 	{
-	    $count = preg_match_all('#<VirtualHost\s+\*\:80>(.*)</VirtualHost>#iUs', $this->content, $matches);
+	    $count = preg_match_all('#<VirtualHost.*>(.*)</VirtualHost>#iUs', $this->content, $matches);
 	    $hosts = array();
 
 	    if ($count)

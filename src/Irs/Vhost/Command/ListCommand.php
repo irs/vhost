@@ -2,7 +2,8 @@
 
 namespace Irs\Vhost\Command;
 
-use Irs\Vhost\HostsFile,
+use Irs\Vhost\Host,
+    Irs\Vhost\HostsFile,
     Irs\Vhost\ConfigurationFile;
 
 use Symfony\Component\Console\Output\OutputInterface,
@@ -69,7 +70,7 @@ MSG;
     }
 
 
-    protected function getHostErrors(\Vhost\Host $host)
+    protected function getHostErrors(Host $host)
     {
         $errors = array();
 

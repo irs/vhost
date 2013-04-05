@@ -2,18 +2,14 @@
 
 namespace Irs\Vhost\Command;
 
+use Irs\Vhost\Host;
 use Irs\Vhost\ApacheController;
-
 use Irs\Vhost\InputHelper;
-
-use Symfony\Component\Console\Helper\DialogHelper;
-
-use Symfony\Component\Console\Input\InputArgument;
-
 use Irs\Vhost\HostsFile;
-
 use Irs\Vhost\ConfigurationFile;
 
+use Symfony\Component\Console\Helper\DialogHelper;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\OutputInterface,
     Symfony\Component\Console\Input\InputInterface,
     Symfony\Component\Console\Input\InputOption,
@@ -47,7 +43,7 @@ class AddCommand extends Command
     {
     	$helper = new InputHelper($output, $this->getHelper('dialog'), $this->configuration, $this->hosts);
 
-    	$host = new \Vhost\Host(
+    	$host = new Host(
         	$hostName = $helper->getHostName(),
             $helper->getDocRoot(),
             $helper->getLog('error', $hostName),
