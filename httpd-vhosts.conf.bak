@@ -1,0 +1,83 @@
+#
+# Virtual Hosts
+#
+# If you want to maintain multiple domains/hostnames on your
+# machine you can setup VirtualHost containers for them. Most configurations
+# use only name-based virtual hosts so the server doesn't need to worry about
+# IP addresses. This is indicated by the asterisks in the directives below.
+#
+# Please see the documentation at 
+# <URL:http://httpd.apache.org/docs/2.2/vhosts/>
+# for further details before you try to setup virtual hosts.
+#
+# You may use the command line option '-S' to verify your virtual host
+# configuration.
+
+#
+# Use name-based virtual hosting.
+#
+NameVirtualHost *:80
+
+
+<Directory "d:/ps-workspace">
+    #
+    # Possible values for the Options directive are "None", "All",
+    # or any combination of:
+    #   Indexes Includes FollowSymLinks SymLinksifOwnerMatch ExecCGI MultiViews
+    #
+    # Note that "MultiViews" must be named *explicitly* --- "Options All"
+    # doesn't give it to you.
+    #
+    # The Options directive is both complicated and important.  Please see
+    # http://httpd.apache.org/docs/2.2/mod/core.html#options
+    # for more information.
+    #
+    Options All
+
+    #
+    # AllowOverride controls what directives may be placed in .htaccess files.
+    # It can be "All", "None", or any combination of the keywords:
+    #   Options FileInfo AuthConfig Limit
+    #
+    AllowOverride None
+
+    #
+    # Controls who can get stuff from this server.
+    #
+    Order allow,deny
+    Allow from all
+
+</Directory>
+
+
+#
+# VirtualHost example:
+# Almost any Apache directive may go into a VirtualHost container.
+# The first VirtualHost section is used for all requests that do not
+# match a ServerName or ServerAlias in any <VirtualHost> block.
+#
+<VirtualHost *:80>
+    ServerAdmin webmaster@dummy-host.dell-990-379.dnepr-dev
+    DocumentRoot "C:/Program Files (x86)/Apache/docs/dummy-host.dell-990-379.dnepr-dev"
+    ServerName dummy-host.dell-990-379.dnepr-dev
+    ServerAlias www.dummy-host.dell-990-379.dnepr-dev
+    ErrorLog "logs/dummy-host.dell-990-379.dnepr-dev-error.log"
+    CustomLog "logs/dummy-host.dell-990-379.dnepr-dev-access.log" common
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerAdmin vkusakin@ebay.com
+    DocumentRoot "d:/ps-workspace/adorama-magento"
+    ServerName adorama.local
+    ErrorLog "logs/adorama-error.log"
+    CustomLog "logs/adorama-access.log" common
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerAdmin vkusakin@ebay.com
+    DocumentRoot "d:/ps-workspace/xcom"
+    ServerName xcom.local
+    ErrorLog "logs/xcom-error.log"
+    CustomLog "logs/xcom-access.log" common
+</VirtualHost>
+
