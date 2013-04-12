@@ -42,13 +42,13 @@ class ConfigurationFile
 	 */
 	public function getHostByName($hostName)
 	{
-		$regexp = '#<VirtualHost\s+\*:80>(.*ServerName\s+"?' . preg_quote($hostName, '#') . '"?\s+.*)</VirtualHost>#Us';
+		$regexp = '#<VirtualHost\s+\*(:80)?>(.*ServerName\s+"?' . preg_quote($hostName, '#') . '"?\s+.*)</VirtualHost>#Us';
 		$result = preg_match($regexp, $this->content, $matches);
 
 		if ($result === false)
 			throw new \RuntimeException("Wrong regular expression: $regexp.");
 		else if ($result)
-			return $this->createHostFromConfig($matches[1]);
+			return $this->createHostFromConfig($matches[2]);
 
 		throw new \OutOfRangeException("Virtual host record with server name $hostName not found.");
 	}
@@ -71,7 +71,7 @@ class ConfigurationFile
 			$this->content .= <<<HST
 \r
 \r
-<VirtualHost *:80>\r
+<VirtualHost *>\r
     ServerAdmin a@b.com\r
     DocumentRoot "{$host->getDocumentRoot()}"\r
     ServerName "{$host->getServerName()}"\r
@@ -95,7 +95,7 @@ HST;
 	 */
 	public function removeHost(Host $host)
 	{
-		$regexp = '#<VirtualHost\s+\*:80>([^<]*ServerName\s+"?' . preg_quote($host->getServerName(), '#') . '"?[^<]*)</VirtualHost>#Us';
+		$regexp = '#<VirtualHost\s+\*(:80)?>([^<]*ServerName\s+"?' . preg_quote($host->getServerName(), '#') . '"?[^<]*)</VirtualHost>#Us';
         $result = preg_replace($regexp, '', $this->content, 1, $count);
 
         if (null === $result)
