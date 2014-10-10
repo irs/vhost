@@ -82,7 +82,7 @@ class InputHelper
     	}
     	while ($docRoot === null);
 
-    	return $docRoot;
+    	return rtrim($docRoot, '/\\');
     }
 
     public function getLog($type, $hostName, $default = null)
